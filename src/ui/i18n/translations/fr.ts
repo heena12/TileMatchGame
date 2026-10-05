@@ -76,7 +76,13 @@ export const fr: Translation = {
   'settings.about': 'À propos',
   'settings.version': 'Version {version}',
   'settings.languageSoon': "D'autres langues arrivent bientôt.",
-  'settings.supportSoon': "L'assistance n'est pas encore disponible.",
+  'settings.privacy': 'Politique de confidentialité',
+  'settings.privacyText':
+    "Tile Match ne vous demande pas de créer un compte et ne collecte ni votre nom, ni votre e-mail, ni votre position. Votre progression, vos pièces et vos réglages sont stockés uniquement sur cet appareil. Les rappels quotidiens sont programmés sur votre appareil et vous pouvez les désactiver dans les Réglages. Si la sauvegarde cloud est activée, seule votre progression de jeu est sauvegardée. Nous ne vendons jamais vos données. Une question ? Contactez-nous depuis Assistance.",
+  'settings.supportText':
+    "Besoin d'aide ou un problème ? Envoyez-nous un e-mail avec la version de l'application et ce qui s'est passé. Nous vous répondrons dès que possible.",
+  'settings.supportEmail': 'Nous écrire',
+  'settings.supportFail': 'Aucune application e-mail. Écrivez à {email}',
   'settings.cloudOff': "La sauvegarde cloud n'est pas encore connectée.",
   'settings.aboutText':
     'Associez trois tuiles à la fois et videz le plateau avant que la réserve ne se remplisse. Explorez le monde image par image.',

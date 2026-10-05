@@ -82,7 +82,13 @@ const en = {
   'settings.about': 'About Us',
   'settings.version': 'Version {version}',
   'settings.languageSoon': 'More languages are coming soon.',
-  'settings.supportSoon': 'Support is not set up yet.',
+  'settings.privacy': 'Privacy Policy',
+  'settings.privacyText':
+    'Tile Match does not ask you to sign up and does not collect your name, email or location. Your progress, coins and settings are stored only on this device. Daily reminders are scheduled on your device and you can turn them off in Settings. If cloud save is switched on, only your game progress is backed up. We never sell your data. Questions? Contact us from Support.',
+  'settings.supportText':
+    'Need help or found a problem? Send us an email and tell us your app version and what happened. We will get back to you as soon as we can.',
+  'settings.supportEmail': 'Email us',
+  'settings.supportFail': 'No email app found. Write to {email}',
   'settings.cloudOff': "Cloud save isn't connected yet.",
   'settings.aboutText':
     'Match three tiles at a time and clear the board before the tray fills up. Explore the world one picture at a time.',

@@ -71,10 +71,22 @@ describe('settings card, like the reference game', () => {
     expect(saved.notificationsEnabled).toBe(false);
   });
 
-  it('says plainly that Support is not set up yet', async () => {
+  it('opens Support with the email address and comes back', async () => {
     const { h } = await open();
     await press(h.r, 'setting-support');
-    expect(dump(h.r)).toContain('Support is not set up yet.');
+    expect(dump(h.r)).toContain('support@sofscript.com');
+    expect(host(h, 'support-email')).toBeDefined();
+    await press(h.r, 'setting-support-back');
+    expect(host(h, 'setting-music')).toBeDefined();
+  });
+
+  it('opens the Privacy Policy and comes back', async () => {
+    const { h } = await open();
+    await press(h.r, 'setting-privacy');
+    expect(dump(h.r)).toContain('does not ask you to sign up');
+    expect(host(h, 'setting-music')).toBeUndefined();
+    await press(h.r, 'setting-privacy-back');
+    expect(host(h, 'setting-music')).toBeDefined();
   });
 
   it('opens About Us and comes back', async () => {

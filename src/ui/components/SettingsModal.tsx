@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   BackHandler,
+  Linking,
   Pressable,
   StyleSheet,
   Switch,
@@ -212,7 +213,9 @@ export function SettingsModal({
   const [measuredHeight, setMeasuredHeight] = useState<number | null>(null);
   const height = measuredHeight ?? window.height;
 
-  const [view, setView] = useState<'main' | 'about' | 'language'>('main');
+  const [view, setView] = useState<
+    'main' | 'about' | 'language' | 'privacy' | 'support'
+  >('main');
   // Asked before Color-friendly Mode is switched off, as in the reference game.
   const [confirmColor, setConfirmColor] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -331,6 +334,19 @@ export function SettingsModal({
     syncService.syncNow().catch(() => undefined);
   };
 
+  const emailSupport = () => {
+    const subject = encodeURIComponent(
+      `${t('app.title')} ${APP_CONFIG.appVersion}`,
+    );
+    Linking.openURL(
+      `mailto:${APP_CONFIG.supportEmail}?subject=${subject}`,
+    ).catch(() =>
+      setMessage(
+        t('settings.supportFail', { email: APP_CONFIG.supportEmail }),
+      ),
+    );
+  };
+
   const music = (value: boolean) => {
     setMusicEnabled(value);
     // Start or stop the music right away.
@@ -374,6 +390,10 @@ export function SettingsModal({
               ? t('settings.about')
               : view === 'language'
               ? t('settings.language')
+              : view === 'privacy'
+              ? t('settings.privacy')
+              : view === 'support'
+              ? t('settings.support')
               : t('settings.title')}
           </Text>
         </View>
@@ -460,7 +480,13 @@ export function SettingsModal({
                 testID="setting-support"
                 icon="💬"
                 label={t('settings.support')}
-                onPress={() => setMessage(t('settings.supportSoon'))}
+                onPress={() => setView('support')}
+              />
+              <LinkRow
+                testID="setting-privacy"
+                icon="🔒"
+                label={t('settings.privacy')}
+                onPress={() => setView('privacy')}
               />
               <LinkRow
                 testID={syncStatus === 'unavailable' ? undefined : 'cloud-sync'}
@@ -546,6 +572,54 @@ export function SettingsModal({
             </View>
             <Pressable
               testID="setting-language-back"
+              accessibilityRole="button"
+              accessibilityLabel={t('settings.back')}
+              onPress={() => setView('main')}
+              style={({ pressed }) => [styles.back, pressed && styles.pressed]}
+            >
+              <Text style={styles.backText}>{t('settings.back')}</Text>
+            </Pressable>
+          </>
+        ) : view === 'privacy' ? (
+          <>
+            <View style={styles.group}>
+              <View style={styles.aboutBox}>
+                <Text testID="privacy-text" style={styles.aboutText}>
+                  {t('settings.privacyText')}
+                </Text>
+              </View>
+            </View>
+            <Pressable
+              testID="setting-privacy-back"
+              accessibilityRole="button"
+              accessibilityLabel={t('settings.back')}
+              onPress={() => setView('main')}
+              style={({ pressed }) => [styles.back, pressed && styles.pressed]}
+            >
+              <Text style={styles.backText}>{t('settings.back')}</Text>
+            </Pressable>
+          </>
+        ) : view === 'support' ? (
+          <>
+            <View style={styles.group}>
+              <View style={styles.aboutBox}>
+                <Text testID="support-text" style={styles.aboutText}>
+                  {t('settings.supportText')}
+                </Text>
+                <Text style={styles.aboutTitle}>{APP_CONFIG.supportEmail}</Text>
+              </View>
+            </View>
+            <Pressable
+              testID="support-email"
+              accessibilityRole="button"
+              accessibilityLabel={t('settings.supportEmail')}
+              onPress={emailSupport}
+              style={({ pressed }) => [styles.back, pressed && styles.pressed]}
+            >
+              <Text style={styles.backText}>{t('settings.supportEmail')}</Text>
+            </Pressable>
+            <Pressable
+              testID="setting-support-back"
               accessibilityRole="button"
               accessibilityLabel={t('settings.back')}
               onPress={() => setView('main')}

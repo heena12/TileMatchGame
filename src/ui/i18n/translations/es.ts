@@ -75,7 +75,13 @@ export const es: Translation = {
   'settings.about': 'Acerca de nosotros',
   'settings.version': 'Versión {version}',
   'settings.languageSoon': 'Pronto habrá más idiomas.',
-  'settings.supportSoon': 'La ayuda aún no está disponible.',
+  'settings.privacy': 'Política de privacidad',
+  'settings.privacyText':
+    'Tile Match no te pide registrarte ni recopila tu nombre, correo o ubicación. Tu progreso, tus monedas y tus ajustes se guardan solo en este dispositivo. Los recordatorios diarios se programan en tu dispositivo y puedes desactivarlos en Ajustes. Si activas el guardado en la nube, solo se respalda tu progreso de juego. Nunca vendemos tus datos. ¿Dudas? Escríbenos desde Ayuda.',
+  'settings.supportText':
+    '¿Necesitas ayuda o encontraste un problema? Envíanos un correo con la versión de la app y lo que ocurrió. Te responderemos lo antes posible.',
+  'settings.supportEmail': 'Escríbenos',
+  'settings.supportFail': 'No hay app de correo. Escribe a {email}',
   'settings.cloudOff': 'El guardado en la nube aún no está conectado.',
   'settings.aboutText':
     'Combina tres fichas a la vez y despeja el tablero antes de que se llene la bandeja. Explora el mundo imagen a imagen.',
