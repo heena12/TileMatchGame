@@ -11,6 +11,8 @@ import type {
  */
 export const REMINDER_CHANNEL_ID = 'reminders_chime';
 export const REMINDER_SOUND = 'reminder_chime';
+export const NOTIFICATION_ICON = 'ic_notification';
+export const NOTIFICATION_COLOR = '#F59E0B';
 
 /** The slice of @notifee/react-native used here, so tests can fake it. */
 export interface NotifeeModule {
@@ -28,7 +30,12 @@ export interface NotifeeModule {
         id: string;
         title: string;
         body: string;
-        android: { channelId: string; pressAction: { id: string } };
+        android: {
+          channelId: string;
+          smallIcon: string;
+          color: string;
+          pressAction: { id: string };
+        };
       },
       trigger: {
         type: number;
@@ -101,7 +108,12 @@ export class NotifeeNotifications implements INotificationService {
             id: item.id,
             title: item.title,
             body: item.body,
-            android: { channelId, pressAction: { id: 'default' } },
+            android: {
+              channelId,
+              smallIcon: NOTIFICATION_ICON,
+              color: NOTIFICATION_COLOR,
+              pressAction: { id: 'default' },
+            },
           },
           {
             type: TriggerType.TIMESTAMP,
