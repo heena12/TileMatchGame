@@ -1,5 +1,19 @@
 {
   "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "noUncheckedIndexedAccess": true,
+    "types": ["node", "jest"],
+    "paths": {
+      "@engine": ["./src/engine/index.ts"],
+      "@engine/*": ["./src/engine/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@state/*": ["./src/state/*"],
+      "@services/*": ["./src/services/*"],
+      "@app/*": ["./src/app/*"],
+      "@navigation/*": ["./src/navigation/*"],
+      "@config/*": ["./src/config/*"]
+    }
+  },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules", "**/Pods"]
 }
