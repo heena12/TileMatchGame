@@ -74,7 +74,7 @@ describe('settings card, like the reference game', () => {
   it('opens Support with the email address and comes back', async () => {
     const { h } = await open();
     await press(h.r, 'setting-support');
-    expect(dump(h.r)).toContain('support@sofscript.com');
+    expect(dump(h.r)).toContain('vintrakart@gmail.com');
     expect(host(h, 'support-email')).toBeDefined();
     await press(h.r, 'setting-support-back');
     expect(host(h, 'setting-music')).toBeDefined();
@@ -143,21 +143,9 @@ describe('settings toasts', () => {
     expect(host(h, 'settings-message')).toBeUndefined();
   });
 
-  it('hides the test reminder row in release until the version is tapped five times', async () => {
-    const globals = globalThis as unknown as { __DEV__: boolean };
-    const before = globals.__DEV__;
-    globals.__DEV__ = false;
-    try {
-      const { h } = await open();
-      expect(host(h, 'setting-test-reminder')).toBeUndefined();
-      for (let i = 0; i < 4; i++) {
-        await press(h.r, 'setting-version');
-      }
-      expect(host(h, 'setting-test-reminder')).toBeUndefined();
-      await press(h.r, 'setting-version');
-      expect(host(h, 'setting-test-reminder')).toBeDefined();
-    } finally {
-      globals.__DEV__ = before;
-    }
+  it('has no test reminder or save-progress row', async () => {
+    const { h } = await open();
+    expect(host(h, 'setting-test-reminder')).toBeUndefined();
+    expect(host(h, 'cloud-sync')).toBeUndefined();
   });
 });

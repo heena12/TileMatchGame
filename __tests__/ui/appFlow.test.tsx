@@ -24,7 +24,7 @@ describe('launch', () => {
     const h = await launch();
     expect(dump(h.r)).toContain('Tile Studio');
     await advance(APP_CONFIG.splashBrandMs + 100);
-    expect(dump(h.r)).toContain('Tile Match');
+    expect(dump(h.r)).toContain('Tile Pop');
     expect(dump(h.r)).toContain('Quickly entering the level');
     await toHome(h);
     expect(dump(h.r)).toContain('Level 1');

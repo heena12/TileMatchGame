@@ -99,19 +99,20 @@ describe('ReminderService', () => {
     expect(notifications.scheduled).toHaveLength(0);
   });
 
-  it('schedules nothing during the tutorial and does not ask yet', async () => {
+  it('asks on first launch but schedules nothing during the tutorial', async () => {
     const { notifications, lifecycle } = setup(
       'undetermined',
       'granted',
       false,
     );
+    await flush();
+    expect(notifications.permissionRequests).toBe(1);
     lifecycle.emit('background');
     await flush();
     expect(notifications.scheduled).toHaveLength(0);
-    expect(notifications.permissionRequests).toBe(0);
   });
 
-  it('asks for permission once the tutorial is done', async () => {
+  it('asks for permission on first launch', async () => {
     const { notifications } = setup('undetermined');
     await flush();
     expect(notifications.permissionRequests).toBe(1);

@@ -63,7 +63,7 @@ export const es: Translation = {
   'notify.day3.title': '¿Echas de menos los rompecabezas?',
   'notify.day3.body': 'Un nivel nuevo te está esperando.',
   'notify.day7.title': 'Ha pasado un tiempo',
-  'notify.day7.body': 'Retoma Tile Match donde lo dejaste.',
+  'notify.day7.body': 'Retoma Tile Pop donde lo dejaste.',
   'settings.colorFriendly': 'Modo para daltónicos',
   'settings.colorWhenOff': 'Al desactivarlo, volverán estos tipos de nivel:',
   'settings.colorVariation': 'Niveles con variaciones de color',
@@ -77,7 +77,7 @@ export const es: Translation = {
   'settings.languageSoon': 'Pronto habrá más idiomas.',
   'settings.privacy': 'Política de privacidad',
   'settings.privacyText':
-    'Tile Match no te pide registrarte ni recopila tu nombre, correo o ubicación. Tu progreso, tus monedas y tus ajustes se guardan solo en este dispositivo. Los recordatorios diarios se programan en tu dispositivo y puedes desactivarlos en Ajustes. Si activas el guardado en la nube, solo se respalda tu progreso de juego. Nunca vendemos tus datos. ¿Dudas? Escríbenos desde Ayuda.',
+    'Tile Pop no te pide registrarte ni recopila tu nombre, correo o ubicación. Tu progreso, tus monedas y tus ajustes se guardan solo en este dispositivo. Los recordatorios diarios se programan en tu dispositivo y puedes desactivarlos en Ajustes. Si activas el guardado en la nube, solo se respalda tu progreso de juego. Nunca vendemos tus datos. ¿Dudas? Escríbenos desde Ayuda.',
   'settings.supportText':
     '¿Necesitas ayuda o encontraste un problema? Envíanos un correo con la versión de la app y lo que ocurrió. Te responderemos lo antes posible.',
   'settings.supportEmail': 'Escríbenos',

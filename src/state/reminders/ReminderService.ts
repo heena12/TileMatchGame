@@ -25,8 +25,9 @@ interface Deps {
  * player leaves, the next few reminders are scheduled with the OS; when they
  * return, those are cancelled. The Settings switch controls all of it.
  *
- * The system permission prompt is only shown once the tutorial is finished (or
- * when the player turns the switch on), never as the first thing they see.
+ * The system permission prompt is shown once, the first time the app opens (or
+ * when the player turns the switch on). Reminders themselves are only scheduled
+ * after the tutorial.
  */
 export class ReminderService {
   /** A developer test reminder, kept through foreground/background changes. */
@@ -60,15 +61,15 @@ export class ReminderService {
     return this.deps.settings.getState().notificationsEnabled;
   }
 
-  /** The app is in front: nothing should fire, and this is a good time to ask. */
+  /** The app is in front: nothing should fire, and this is when we ask once. */
   private async onReturn(): Promise<void> {
-    const { notifications, progress } = this.deps;
+    const { notifications } = this.deps;
     if (!notifications.isAvailable) {
       return;
     }
     const test = this.pendingTest();
     await (test ? notifications.replaceAll([test]) : notifications.cancelAll());
-    if (this.enabled && progress.getState().tutorialCompleted) {
+    if (this.enabled) {
       await this.askOnce();
     }
   }

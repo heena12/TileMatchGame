@@ -39,76 +39,13 @@ const newBackend = () => new InMemoryBackend(source);
 const withProvider = (backend: InMemoryBackend, player = 'ann', name = 'Ann') =>
   launch(source, stocked(), backend.client(player, name));
 
-async function openSettings(h: Harness) {
-  await toHome(h);
-  await press(h.r, 'home-settings');
-}
-
-const cloudStatus = (h: Harness) => {
-  const text = hostByPrefix(h.r, 'cloud-status')[0]?.props.children;
-  return Array.isArray(text) ? text.join('') : text;
-};
-
 async function winLevel(h: Harness) {
   await toHome(h);
   await press(h.r, 'home-continue');
   await playTiles(h, [1, 2, 3, 4, 5, 6]);
 }
 
-describe('Settings: cloud save', () => {
-  it('says plainly that no cloud is connected, and offers no sync button', async () => {
-    const h = await launch(source, stocked());
-    await openSettings(h);
-    expect(cloudStatus(h)).toBe('Not connected yet');
-    expect(byId(h.r, 'cloud-sync')).toBeUndefined();
-  });
-
-  it('shows the state once connected and synced', async () => {
-    const h = await withProvider(newBackend());
-    await openSettings(h);
-    expect(cloudStatus(h)).toBe('Saved to the cloud');
-    expect(byId(h.r, 'cloud-sync')).toBeDefined();
-  });
-
-  it('"Sync now" syncs again', async () => {
-    const backend = newBackend();
-    const h = await withProvider(backend);
-    await openSettings(h);
-    const pulls = backend.calls.pull;
-    await press(h.r, 'cloud-sync');
-    expect(backend.calls.pull).toBe(pulls + 1);
-    expect(cloudStatus(h)).toBe('Saved to the cloud');
-  });
-
-  it('shows offline, then recovers', async () => {
-    const backend = newBackend();
-    const h = await withProvider(backend);
-    await openSettings(h);
-    backend.offline = true;
-    await press(h.r, 'cloud-sync');
-    expect(cloudStatus(h)).toBe('Offline, will try again');
-    backend.offline = false;
-    await press(h.r, 'cloud-sync');
-    expect(cloudStatus(h)).toBe('Saved to the cloud');
-  });
-
-  it('asks for an app update when the cloud copy is from a newer app', async () => {
-    const backend = newBackend();
-    backend.plant('ann', JSON.stringify({ schemaVersion: 99 }));
-    const h = await withProvider(backend);
-    await openSettings(h);
-    expect(cloudStatus(h)).toBe('Update the app to sync');
-  });
-
-  it('reports a problem when the cloud copy cannot be read, without overwriting it', async () => {
-    const backend = newBackend();
-    backend.plant('ann', 'garbage');
-    const h = await withProvider(backend);
-    await openSettings(h);
-    expect(cloudStatus(h)).toBe('Sync did not work');
-    expect(backend.peek('ann')?.payload).toBe('garbage');
-  });
-
+describe('Cloud save', () => {
   it('progress made in the game reaches the cloud without any button press', async () => {
     const backend = newBackend();
     const h = await withProvider(backend);

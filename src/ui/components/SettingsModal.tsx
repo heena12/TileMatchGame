@@ -20,16 +20,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import { APP_CONFIG } from '@config/constants';
 import { LANGUAGES, languageName } from '@config/languages';
-import {
-  useGameController,
-  useReminders,
-  useSettings,
-  useSync,
-  useSyncService,
-} from '@state/StoresContext';
-import type { SyncStatus } from '@state/sync/syncStore';
+import { useGameController, useSettings } from '@state/StoresContext';
 import { transitionConfig } from '@ui/animation/transitionConfig';
-import type { StringKey } from '@ui/i18n/strings';
 import { t } from '@ui/i18n/strings';
 import { useLanguage } from '@ui/i18n/useLanguage';
 import { TileBadge } from '@ui/components/TileBadge';
@@ -40,16 +32,6 @@ import {
   spacing,
   textOutline,
 } from '@ui/theme/tokens';
-
-const CLOUD_TEXT: Readonly<Record<SyncStatus, StringKey>> = {
-  unavailable: 'cloud.unavailable',
-  idle: 'cloud.idle',
-  syncing: 'cloud.syncing',
-  synced: 'cloud.synced',
-  offline: 'cloud.offline',
-  update_required: 'cloud.update',
-  error: 'cloud.error',
-};
 
 /** How long the card takes to pop in (ms). */
 const OPEN_MS = 220;
@@ -203,10 +185,7 @@ export function SettingsModal({
   const language = useSettings(s => s.language);
   const setLanguage = useSettings(s => s.setLanguage);
   useLanguage();
-  const syncStatus = useSync(s => s.status);
-  const syncService = useSyncService();
   const controller = useGameController();
-  const reminders = useReminders();
   // The card sits at a tenth of the height this overlay really has (on the
   // web the game is a narrow column, so measure it instead of the window).
   const window = useWindowDimensions();
@@ -219,20 +198,6 @@ export function SettingsModal({
   // Asked before Color-friendly Mode is switched off, as in the reference game.
   const [confirmColor, setConfirmColor] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  // Tapping the version text 5 times reveals developer tools, in any build.
-  const [devTools, setDevTools] = useState(__DEV__);
-  const versionTaps = useRef(0);
-  const tapVersion = () => {
-    versionTaps.current += 1;
-    const left = 5 - versionTaps.current;
-    if (left <= 0) {
-      versionTaps.current = 0;
-      setDevTools(true);
-      setMessage(t('settings.devOn'));
-    } else if (left <= 3) {
-      setMessage(t('settings.devSteps', { n: left }));
-    }
-  };
   useEffect(() => {
     if (message === null) {
       return undefined;
@@ -325,14 +290,6 @@ export function SettingsModal({
         state: t(value ? 'settings.on' : 'settings.off'),
       }),
     );
-
-  const saveProgress = () => {
-    if (syncStatus === 'unavailable') {
-      setMessage(t('settings.cloudOff'));
-      return;
-    }
-    syncService.syncNow().catch(() => undefined);
-  };
 
   const emailSupport = () => {
     const subject = encodeURIComponent(
@@ -489,42 +446,11 @@ export function SettingsModal({
                 onPress={() => setView('privacy')}
               />
               <LinkRow
-                testID={syncStatus === 'unavailable' ? undefined : 'cloud-sync'}
-                icon="💾"
-                label={t('settings.save')}
-                note={t(CLOUD_TEXT[syncStatus])}
-                noteTestID="cloud-status"
-                noteBelow
-                disabled={syncStatus === 'syncing'}
-                onPress={saveProgress}
-              />
-              <LinkRow
                 testID="setting-replay-tutorial"
                 icon="🎓"
                 label={t('settings.replayTutorial')}
                 onPress={onReplayTutorial}
               />
-              {devTools ? (
-                <LinkRow
-                  testID="setting-test-reminder"
-                  icon="🔔"
-                  label={t('settings.testReminder')}
-                  onPress={() => {
-                    reminders
-                      .sendTestReminder()
-                      .then(sent =>
-                        setMessage(
-                          t(
-                            sent
-                              ? 'settings.testReminderSent'
-                              : 'settings.testReminderNo',
-                          ),
-                        ),
-                      )
-                      .catch(() => undefined);
-                  }}
-                />
-              ) : null}
               <LinkRow
                 testID="setting-about"
                 icon="ℹ️"
@@ -533,17 +459,11 @@ export function SettingsModal({
               />
             </View>
 
-            <Pressable
-              testID="setting-version"
-              accessibilityRole="text"
-              hitSlop={16}
-              onPress={tapVersion}
-              style={styles.versionTap}
-            >
+            <View style={styles.versionTap}>
               <Text style={styles.version}>
                 {t('settings.version', { version: APP_CONFIG.appVersion })}
               </Text>
-            </Pressable>
+            </View>
           </>
         ) : view === 'language' ? (
           <>

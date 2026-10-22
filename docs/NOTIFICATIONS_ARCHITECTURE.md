@@ -4,7 +4,7 @@ Governed by [PROJECT_RULES.md](../PROJECT_RULES.md). No engine code is touched.
 
 ## Flow
 
-1. App starts: `ReminderService.start()` cancels anything pending. If the switch is on and the tutorial is finished, it asks for system permission once.
+1. App starts: `ReminderService.start()` cancels anything pending. If the switch is on, it asks for system permission once, on first launch.
 2. Player leaves the app (`background`): if the switch is on, the tutorial is done and permission is granted, three reminders are scheduled at 18:00 local: a daily-reward or streak-at-risk reminder (today if the reward is unclaimed and 18:00 has not passed, otherwise tomorrow), and come-back reminders 3 and 7 days later with text in the current language.
 3. Player returns (`active`): everything pending is cancelled.
 4. Settings switch turned on: system permission is requested; if refused, the switch is turned back off. Turned off: pending reminders are cancelled.

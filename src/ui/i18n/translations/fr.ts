@@ -63,7 +63,7 @@ export const fr: Translation = {
   'notify.day3.title': 'Les puzzles vous manquent ?',
   'notify.day3.body': 'Un nouveau niveau vous attend.',
   'notify.day7.title': 'Cela fait un moment',
-  'notify.day7.body': 'Reprenez Tile Match là où vous vous êtes arrêté.',
+  'notify.day7.body': 'Reprenez Tile Pop là où vous vous êtes arrêté.',
   'settings.colorFriendly': 'Mode daltonien',
   'settings.colorWhenOff':
     'Une fois désactivé, ces types de niveaux reviendront :',
@@ -78,7 +78,7 @@ export const fr: Translation = {
   'settings.languageSoon': "D'autres langues arrivent bientôt.",
   'settings.privacy': 'Politique de confidentialité',
   'settings.privacyText':
-    "Tile Match ne vous demande pas de créer un compte et ne collecte ni votre nom, ni votre e-mail, ni votre position. Votre progression, vos pièces et vos réglages sont stockés uniquement sur cet appareil. Les rappels quotidiens sont programmés sur votre appareil et vous pouvez les désactiver dans les Réglages. Si la sauvegarde cloud est activée, seule votre progression de jeu est sauvegardée. Nous ne vendons jamais vos données. Une question ? Contactez-nous depuis Assistance.",
+    "Tile Pop ne vous demande pas de créer un compte et ne collecte ni votre nom, ni votre e-mail, ni votre position. Votre progression, vos pièces et vos réglages sont stockés uniquement sur cet appareil. Les rappels quotidiens sont programmés sur votre appareil et vous pouvez les désactiver dans les Réglages. Si la sauvegarde cloud est activée, seule votre progression de jeu est sauvegardée. Nous ne vendons jamais vos données. Une question ? Contactez-nous depuis Assistance.",
   'settings.supportText':
     "Besoin d'aide ou un problème ? Envoyez-nous un e-mail avec la version de l'application et ce qui s'est passé. Nous vous répondrons dès que possible.",
   'settings.supportEmail': 'Nous écrire',

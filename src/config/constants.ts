@@ -2,7 +2,7 @@ export const APP_CONFIG = {
   storageId: 'tile-match',
   /** Shown in Settings > About. Keep in step with package.json. */
   appVersion: '0.0.1',
-  supportEmail: 'support@sofscript.com',
+  supportEmail: 'vintrakart@gmail.com',
   /** Brand screen alone, then the loading screen until splashDurationMs. */
   splashBrandMs: 1400,
   splashDurationMs: 3800,

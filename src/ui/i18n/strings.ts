@@ -7,7 +7,7 @@ import { hi } from './translations/hi';
 
 /** Every user-visible string lives here so translation needs no code changes. */
 const en = {
-  'app.title': 'Tile Match',
+  'app.title': 'Tile Pop',
 
   'splash.loading': 'Quickly entering the level...',
   // Studio shown on the first splash screen; replace with your own.
@@ -70,7 +70,7 @@ const en = {
   'notify.day3.title': 'Miss the puzzles?',
   'notify.day3.body': 'A fresh level is ready for you.',
   'notify.day7.title': 'It has been a while',
-  'notify.day7.body': 'Pick up where you left off in Tile Match.',
+  'notify.day7.body': 'Pick up where you left off in Tile Pop.',
   'settings.colorFriendly': 'Color-friendly Mode',
   'settings.colorWhenOff': 'When disabled, these level types will return:',
   'settings.colorVariation': 'Color variation levels',
@@ -84,7 +84,7 @@ const en = {
   'settings.languageSoon': 'More languages are coming soon.',
   'settings.privacy': 'Privacy Policy',
   'settings.privacyText':
-    'Tile Match does not ask you to sign up and does not collect your name, email or location. Your progress, coins and settings are stored only on this device. Daily reminders are scheduled on your device and you can turn them off in Settings. If cloud save is switched on, only your game progress is backed up. We never sell your data. Questions? Contact us from Support.',
+    'Tile Pop does not ask you to sign up and does not collect your name, email or location. Your progress, coins and settings are stored only on this device. Daily reminders are scheduled on your device and you can turn them off in Settings. If cloud save is switched on, only your game progress is backed up. We never sell your data. Questions? Contact us from Support.',
   'settings.supportText':
     'Need help or found a problem? Send us an email and tell us your app version and what happened. We will get back to you as soon as we can.',
   'settings.supportEmail': 'Email us',
